@@ -38,9 +38,9 @@
 ### 性能与结果
 
 以下为该模型在BLEU1、BLEU4和ROUGE1、ROUGEL上的分数。
-![score_table](imgs\score_table.png "score table")
-![bleu_score_comparison](imgs\bleu_score_comparison.png "bleu score comparison")
-![rouge_score_comparison](imgs\rouge_score_comparison.png "rouge score comparison")
+![score_table](imgs/score_table.png "score table")
+![bleu_score_comparison](imgs/bleu_score_comparison.png "bleu score comparison")
+![rouge_score_comparison](imgs/rouge_score_comparison.png "rouge score comparison")
 
 由于训练集很小（6000+1000+1000），失败的案例也有许多。
 ![sucess](imgs\sucess.png "sucess case")

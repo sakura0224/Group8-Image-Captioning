@@ -68,7 +68,7 @@ def greedy_decoding(model, img_features_batched, sos_id, eos_id, pad_id, idx2wor
     # Complete the caption for images which haven't been fully decoded
     for batch_idx in range(batch_size):
         if not is_decoded[batch_idx]:
-            generated_captions[batch_idx].append(idx2word[str(eos_id)])
+            generated_captions[batch_idx].append(idx2word.get(str(eos_id), "<end>"))
 
     # Clean the EOS symbol
     for caption in generated_captions:

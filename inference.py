@@ -8,6 +8,8 @@ from decoder import CaptionDecoder
 from utils.decoding_utils import greedy_decoding
 
 # 加载预训练的 ResNet50 模型并移除最后的全连接层
+
+
 def get_image_features(image_path, device):
     resnet = models.resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
     resnet = torch.nn.Sequential(*list(resnet.children())[:-2])
@@ -17,7 +19,8 @@ def get_image_features(image_path, device):
     preprocess = transforms.Compose([
         transforms.Resize((256, 256)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[
+                             0.229, 0.224, 0.225])
     ])
 
     image = Image.open(image_path).convert("RGB")
@@ -33,6 +36,8 @@ def get_image_features(image_path, device):
     return features
 
 # 生成图像描述
+
+
 def generate_caption(model, image_features, config, device, idx2word):
     model.eval()
     with torch.no_grad():
@@ -55,6 +60,8 @@ def generate_caption(model, image_features, config, device, idx2word):
         return captions[0]  # 返回单个描述
 
 # 加载词汇表
+
+
 def load_vocab(word2idx_path):
     with open(word2idx_path, "r") as f:
         word2idx = json.load(f)
@@ -62,36 +69,31 @@ def load_vocab(word2idx_path):
     return word2idx, idx2word
 
 # 核心函数，接收图像并生成描述
-def generate_caption_from_image(image, config_path="config.json", model_path="checkpoints/Oct-16_12-23-45/model_99.pth", vocab_path='dataset/word2idx.json'):
-    print("开始加载模型和配置文件...")  # 调试信息
+
+
+def generate_caption_from_image(image, config_path="config.json", model_path="checkpoints/Oct-16_12-23-45/model_99.pth", vocab_path='dataset/word2idx.json', device=torch.device("cuda" if torch.cuda.is_available() else "cpu")):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # 加载配置文件
     with open(config_path, "r") as f:
         config = json.load(f)
-    print("配置文件加载成功。")  # 调试信息
 
     # 加载词汇表
     word2idx, idx2word = load_vocab(vocab_path)
-    print("词汇表加载成功。")  # 调试信息
 
     # 加载模型
     model = CaptionDecoder(config)
     model.load_state_dict(torch.load(model_path, map_location=device))
     model = model.to(device)
-    print("模型加载成功。")  # 调试信息
 
     # 检查 image 是路径还是 PIL 图像，如果是路径则加载
     if isinstance(image, str):
         image = Image.open(image).convert("RGB")
-    image_path = "temp_image.jpg"
+    image_path = "imgs/temp_image.jpg"
     image.save(image_path)
 
     image_features = get_image_features(image_path, device)
-    print("图像特征提取成功。")  # 调试信息
 
     # 生成并返回描述
     caption = generate_caption(model, image_features, config, device, idx2word)
-    print("生成描述成功。")  # 调试信息
     return caption
-

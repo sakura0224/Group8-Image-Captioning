@@ -1,12 +1,14 @@
 dataset/
 glove_embeddings/
-img/
 checkpoints/
 runs/
 tokenizer.py
 temp_image.jpg
 flagged/
-imgs/
+imgs/captions/
+imgs/dataset/
+imgs/bleu_4.jpg
+imgs/decoder.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

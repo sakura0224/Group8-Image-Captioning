@@ -35,6 +35,13 @@
 - `utils.py`：包含项目中的一些工具函数。
 - `config.json`：模型参数和训练设置。
 
+### 性能与结果
+
+以下为该模型在BLEU1、BLEU4和ROUGE1、ROUGEL上的分数。
+![score_table](imgs\score_table.png "score table")
+![bleu_score_comparison](imgs\bleu_score_comparison.png "bleu score comparison")
+![rouge_score_comparison](imgs\rouge_score_comparison.png "rouge score comparison")
+
 ### 安装与运行
 
 1. 按照 [machinelearningmastery 博客](https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/)中的说明,下载Flickr8k数据集并放入相应位置。

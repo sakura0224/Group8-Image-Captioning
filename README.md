@@ -42,6 +42,10 @@
 ![bleu_score_comparison](imgs\bleu_score_comparison.png "bleu score comparison")
 ![rouge_score_comparison](imgs\rouge_score_comparison.png "rouge score comparison")
 
+由于训练集很小（6000+1000+1000），失败的案例也有许多。
+![sucess](imgs\sucess.png "sucess case")
+![failure](imgs\failure.png "failure case")
+
 ### 安装与运行
 
 1. 按照 [machinelearningmastery 博客](https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/)中的说明,下载Flickr8k数据集并放入相应位置。

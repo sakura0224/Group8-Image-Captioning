@@ -1,70 +1,72 @@
-# 上海大学课程项目
+# Shanghai University Course Project
 
-## 自然语言处理 Natural Language Processing
+## Natural Language Processing
 
-## 第8组 图片描述识别  Image Captioning
+## Group 8: Image Caption Recognition
 
-### 项目概要
+[中文](https://github.com/sakura0224/Group8-Image-Captioning/README_cn.md)
 
-本项目旨在实现一个基于Transformer架构的图像描述生成模型（Image Captioning）。通过结合预训练的ResNet50模型作为图像编码器，Transformer作为解码器，模型能够自动生成自然语言描述，用以表达输入图像中的内容。该项目的主要目标是在图像输入的基础上生成高质量的自然语言描述。
+### Project Overview
 
-### 主要特性
+This project aims to implement an image caption generation model based on the Transformer architecture. By combining a pre-trained ResNet50 model as the image encoder and a Transformer as the decoder, the model can automatically generate natural language descriptions that express the content of input images. The primary goal of this project is to produce high-quality natural language descriptions based on image inputs.
 
-- **图像特征提取**：使用预训练的 ResNet50 模型对输入图像进行特征提取，生成高维度的特征向量。
-- **基于 Transformer 的解码器**：通过 Transformer 解码器，将图像特征逐词生成相应的文本描述。
-- **解码策略**：支持贪心解码（Greedy Decoding），提高生成描述的质量和多样性。
-- **Flickr8k 数据集**：在 Flickr8k 数据集上进行训练和测试，以确保模型的泛化能力和准确性。
-- **性能评估**：通过 BLEU-1、BLEU-4 和 ROUGE 分数评估模型生成的图像描述质量。
+### Key Features
 
-### 系统架构
+- **Image Feature Extraction**: Uses a pre-trained ResNet50 model to extract features from input images, generating high-dimensional feature vectors.
+- **Transformer-based Decoder**: Through a Transformer decoder, the model generates corresponding text descriptions word by word based on image features.
+- **Decoding Strategy**: Supports Greedy Decoding, which enhances the quality and diversity of generated descriptions.
+- **Flickr8k Dataset**: Trained and tested on the Flickr8k dataset to ensure the model's generalization ability and accuracy.
+- **Performance Evaluation**: Evaluates the quality of generated image descriptions using BLEU-1, BLEU-4, and ROUGE scores.
 
-1. **图像编码器**：采用预训练的 ResNet50 提取图像特征，将其转化为可供解码器处理的特征向量。
-2. **文本解码器**：基于 Transformer 的解码器模型接收图像特征，并生成相应的自然语言描述。
-3. **解码策略**：
-   - **贪心解码**：每次选择概率最高的词，逐步生成完整的描述。
+### System Architecture
 
-### 文件结构
+1. **Image Encoder**: Uses a pre-trained ResNet50 to extract image features and convert them into feature vectors for the decoder.
+2. **Text Decoder**: A Transformer-based decoder receives image features and generates corresponding natural language descriptions.
+3. **Decoding Strategy**:
+   - **Greedy Decoding**: Selects the word with the highest probability at each step to generate the complete description.
 
-- `gradio_interface.py`: 项目的gradio界面，入口。
-- `dataloader.py`：负责加载 Flickr8k 数据集，并进行图像预处理与标签处理。
-- `decoder.py`：包含基于 Transformer 的解码器，用于逐词生成图像描述。
-- `decoding_utils.py`：包含贪心解码的实现。
-- `inference.py`：用于推理阶段，通过加载模型和图片生成描述。
-- `evaluation.py`：实现了 BLEU 和 ROUGE 评分函数，用于评估模型性能。
-- `main.py`：训练模型的主脚本。
-- `utils.py`：包含项目中的一些工具函数。
-- `config.json`：模型参数和训练设置。
+### File Structure
 
-### 性能与结果
+- `gradio_interface.py`: Gradio interface for the project, the entry point.
+- `dataloader.py`: Responsible for loading the Flickr8k dataset and handling image preprocessing and label processing.
+- `decoder.py`: Contains the Transformer-based decoder, used for generating image descriptions word by word.
+- `decoding_utils.py`: Implements Greedy Decoding.
+- `inference.py`: Used in the inference phase to generate descriptions by loading the model and images.
+- `evaluation.py`: Implements BLEU and ROUGE scoring functions to evaluate model performance.
+- `main.py`: The main script for model training.
+- `utils.py`: Contains utility functions for the project.
+- `config.json`: Contains model parameters and training settings.
 
-以下为该模型在BLEU1、BLEU4和ROUGE1、ROUGEL上的分数。
+### Performance and Results
+
+The following scores show the model’s performance on BLEU-1, BLEU-4, ROUGE-1, and ROUGE-L metrics.
 ![score_table](imgs/score_table.png "score table")
 ![bleu_score_comparison](imgs/bleu_score_comparison.png "bleu score comparison")
 ![rouge_score_comparison](imgs/rouge_score_comparison.png "rouge score comparison")
 
-由于训练集很小（6000+1000+1000），失败的案例也有许多。
-![sucess](imgs/sucess.png "sucess case")
+Due to the small training set (6000+1000+1000), there are also many failure cases.
+![success](imgs/success.png "success case")
 ![failure](imgs/failure.png "failure case")
 
-### 安装与运行
+### Installation and Execution
 
-1. 按照 [machinelearningmastery 博客](https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/)中的说明,下载Flickr8k数据集并放入相应位置。
-2. 下载 [GloVe 嵌入](https://nlp.stanford.edu/projects/glove/)，名称为 “glove.6B.zip ”。
-3. 打开 Anaconda 提示符，并使用以下命令导航到该 repo 的目录： cd PATH_TO_THIS_REPO。
-4. 执行 conda env create -f environment.yml 以建立一个包含所有必要依赖项的环境。
-5. 执行： conda activate pytorch-image-captioning 激活之前创建的环境。
-6. 在[配置文件](https://github.com/sakura0224/Group8-Image-Captioning/blob/main/config.json)中修改 glove_dir 项，将其更改为下载 GloVe 嵌入文件的目录路径。
-7. 运行 python prepare_dataset.py。会执行以下步骤：
-   - 加载图像的原始标题
-   - 对标题进行预处理
-   - 生成标题语料库中出现的词库
-   - 为之前创建的词汇表中出现的标记提取 GloVe 嵌入
-   - 进一步调整词库（舍弃没有嵌入词的词语）
-   - 数据集拆分： 根据预定义的分割，分离图像-标题映射
-8. 运行 python main.py 启动模型训练。
+1. Download the Flickr8k dataset following the instructions on the [Machine Learning Mastery blog](https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/) and place it in the appropriate directory.
+2. Download the [GloVe embeddings](https://nlp.stanford.edu/projects/glove/) file named "glove.6B.zip."
+3. Open the Anaconda prompt and navigate to the directory of this repository using: `cd PATH_TO_THIS_REPO`.
+4. Run `conda env create -f environment.yml` to set up an environment with all necessary dependencies.
+5. Execute `conda activate pytorch-image-captioning` to activate the previously created environment.
+6. In the [config file](https://github.com/sakura0224/Group8-Image-Captioning/blob/main/config.json), modify the `glove_dir` entry to point to the directory where the GloVe embedding files are stored.
+7. Run `python prepare_dataset.py` to perform the following:
+   - Load raw image captions
+   - Preprocess captions
+   - Generate a vocabulary of words from the caption corpus
+   - Extract GloVe embeddings for tokens in the created vocabulary
+   - Refine the vocabulary (discard words without embeddings)
+   - Split the dataset into predefined train-test segments for image-caption mapping
+8. Run `python main.py` to start training the model.
 
-### 参考
+### References
 
-[How to Develop a Deep Learning Photo Caption Generator from Scratch](https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/)
-[senadkurtisi/pytorch-image-captioning](https://github.com/senadkurtisi/pytorch-image-captioning)
-[sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning)
+- [How to Develop a Deep Learning Photo Caption Generator from Scratch](https://machinelearningmastery.com/develop-a-deep-learning-caption-generation-model-in-python/)
+- [senadkurtisi/pytorch-image-captioning](https://github.com/senadkurtisi/pytorch-image-captioning)
+- [sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Image-Captioning)

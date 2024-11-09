@@ -112,10 +112,12 @@ class CaptionDecoder(nn.Module):
         """Performs forward pass of the module."""
         # 假设 image_features 是 [batch_size, 2048]
         # 需要扩展维度为 [1, batch_size, 2048]，增加 sequence_length 维度
-        image_features = image_features.unsqueeze(0)  # 变成 [1, batch_size, 2048]
-        
+        image_features = image_features.unsqueeze(
+            0)  # 变成 [1, batch_size, 2048]
+
         # 现在可以进行 permute 操作，将其调整为 [batch_size, 1, 2048] 或其他所需形状
-        image_features = image_features.permute(1, 0, 2)  # 变成 [batch_size, 1, 2048]
+        image_features = image_features.permute(
+            1, 0, 2)  # 变成 [batch_size, 1, 2048]
         # Adapt the dimensionality of the features for image patches
         image_features = self.entry_mapping_img(image_features)
         image_features = image_features.permute(1, 0, 2)

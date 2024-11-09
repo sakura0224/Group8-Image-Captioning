@@ -17,7 +17,7 @@ class Flickr8KDataset(Dataset):
 
     def __init__(self, config, path, training=True):
         """Initializes the module.
-        
+
         Arguments:
             config (object): Contains dataset configuration
             path (str): Location where image captions are stored
@@ -33,7 +33,8 @@ class Flickr8KDataset(Dataset):
         # Load the vocabulary mappings
         with open(config["word2idx_path"], "r", encoding="utf8") as f:
             self._word2idx = json.load(f)
-        self._idx2word = {str(idx): word for word, idx in self._word2idx.items()}
+        self._idx2word = {str(idx): word for word,
+                          idx in self._word2idx.items()}
 
         # Auxiliary token indices
         self._start_idx = config["START_idx"]
@@ -50,7 +51,8 @@ class Flickr8KDataset(Dataset):
 
         # Transformation to apply to each image
         self._image_specs = config["image_specs"]
-        self._image_transform = self._construct_image_transform(self._image_specs["image_size"])
+        self._image_transform = self._construct_image_transform(
+            self._image_specs["image_size"])
 
         # Create paths to image files belonging to the subset
         subset = "train" if training else "validation"
@@ -97,7 +99,8 @@ class Flickr8KDataset(Dataset):
         # Adapt the images to CNN trained on ImageNet { PIL -> Tensor }
         image_tensors = [self._image_transform(img) for img in images_raw]
 
-        images_processed = {img_name: img_tensor for img_name, img_tensor in zip(image_names, image_tensors)}
+        images_processed = {img_name: img_tensor for img_name,
+                            img_tensor in zip(image_names, image_tensors)}
         return images_processed
 
     def _group_captions(self, data):
@@ -115,7 +118,8 @@ class Flickr8KDataset(Dataset):
 
         for line in data:
             caption_data = line.split()
-            img_name, img_caption = caption_data[0].split("#")[0], caption_data[1:]
+            img_name, img_caption = caption_data[0].split("#")[
+                0], caption_data[1:]
             if img_name not in grouped_captions:
                 # We came across the first caption for this particular image
                 grouped_captions[img_name] = []
@@ -168,7 +172,8 @@ class Flickr8KDataset(Dataset):
 
         num_batches = len(caption_data_items) // batch_size
         for idx in range(num_batches):
-            caption_samples = caption_data_items[idx * batch_size: (idx + 1) * batch_size]
+            caption_samples = caption_data_items[idx *
+                                                 batch_size: (idx + 1) * batch_size]
             batch_imgs = []
             batch_captions = []
 
@@ -216,8 +221,10 @@ class Flickr8KDataset(Dataset):
             tgt_tokens += padding_vec.copy()
 
         # Apply the vocabulary mapping to the input tokens
-        input_tokens = [self._word2idx.get(token, self._UNK_idx) for token in input_tokens]
-        tgt_tokens = [self._word2idx.get(token, self._UNK_idx) for token in tgt_tokens]
+        input_tokens = [self._word2idx.get(
+            token, self._UNK_idx) for token in input_tokens]
+        tgt_tokens = [self._word2idx.get(
+            token, self._UNK_idx) for token in tgt_tokens]
 
         input_tokens = torch.Tensor(input_tokens).long()
         tgt_tokens = torch.Tensor(tgt_tokens).long()

@@ -8,10 +8,6 @@ def predict_caption(image):
     caption = generate_caption_from_image(image)  # 调用 inference.py 中的函数
     return caption
 
-# def predict_caption(image):
-#     print("图片接收成功。")  # 确认图片已上传
-#     return "这是一张图片的描述。"
-
 
 # 创建 Gradio 接口
 image_input = gr.Image(type="pil", label="上传图片")

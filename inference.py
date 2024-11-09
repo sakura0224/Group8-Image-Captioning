@@ -90,6 +90,8 @@ def generate_caption_from_image(image, config_path="config.json", model_path="ch
     if isinstance(image, str):
         image = Image.open(image).convert("RGB")
     image_path = "imgs/temp_image.jpg"
+    if image is None:
+        raise ValueError("Image is None, please check input.")
     image.save(image_path)
 
     image_features = get_image_features(image_path, device)

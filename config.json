@@ -2,25 +2,21 @@
     "dataset_dir": "dataset",
     "glove_dir": "glove_embeddings",
     "dataset_path": "./dataset/flickr8k/Flickr8k.token.txt",
-
     "split_images": {
         "train": "./dataset/flickr8k/Flickr_8k.trainImages.txt",
         "validation": "./dataset/flickr8k/Flickr_8k.devImages.txt",
         "test": "./dataset/flickr8k/Flickr_8k.testImages.txt"
     },
-    
     "split_save": {
         "train": "./dataset/flickr8k/train.txt",
         "validation": "./dataset/flickr8k/validation.txt",
         "test": "./dataset/flickr8k/test.txt"
     },
-
     "word2idx_path": "./dataset/word2idx.json",
     "embeddings": {
         "path": "./dataset/embeddings.txt",
         "size": 100
     },
-
     "image_specs": {
         "image_dir": {
             "train": "./dataset/flickr8k/Images",
@@ -30,31 +26,22 @@
         "img_feature_channels": 2048,
         "image_size": 256
     },
-
     "vocab_size": 7890,
-
     "PAD_token": "<pad>",
     "PAD_idx": 0,
-
     "START_idx": 1,
     "START_token": "<start>",
-
     "END_idx": 2,
     "END_token": "<end>",
-
     "UNK_idx": 3,
     "UNK_token": "<unk>",
-
     "max_len": 64,
-
     "use_gpu": true,
     "seed": 2021,
-
     "batch_size": {
         "train": 32,
         "eval": 32
     },
-
     "model_configuration": {
         "decoder_layers": 6,
         "d_model": 512,
@@ -62,7 +49,6 @@
         "attention_heads": 8,
         "dropout": 0.5
     },
-
     "train_config": {
         "num_of_epochs": 100,
         "warmup_steps": 2811,
@@ -71,14 +57,26 @@
         "gradient_clipping": 2.0,
         "eval_period": 3
     },
-
     "bleu_weights": {
-        "bleu-1": [1.0],
-        "bleu-2": [0.5, 0.5],
-        "bleu-3": [0.333, 0.333, 0.333],
-        "bleu-4": [0.25, 0.25, 0.25, 0.25]
+        "bleu-1": [
+            1.0
+        ],
+        "bleu-2": [
+            0.5,
+            0.5
+        ],
+        "bleu-3": [
+            0.333,
+            0.333,
+            0.333
+        ],
+        "bleu-4": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+        ]
     },
-
     "checkpoint": {
         "load": false,
         "checkpoint_path": "."

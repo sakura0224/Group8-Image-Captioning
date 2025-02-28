@@ -4,7 +4,7 @@
 
 ## 第8组 图片描述识别
 
-[English](https://github.com/sakura0224/Group8-Image-Captioning/README.md)
+[English](https://github.com/sakura0224/Group8-Image-Captioning)
 
 ### 项目概要
 

@@ -4,7 +4,7 @@
 
 ## Group 8: Image Caption Recognition
 
-[中文](https://github.com/sakura0224/Group8-Image-Captioning/README_cn.md)
+[中文](https://github.com/sakura0224/Group8-Image-Captioning/blob/main/README_cn.md)
 
 ### Project Overview
 

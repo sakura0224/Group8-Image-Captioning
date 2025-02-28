@@ -45,7 +45,7 @@
 ![rouge_score_comparison](imgs/rouge_score_comparison.png "rouge score comparison")
 
 由于训练集很小（6000+1000+1000），失败的案例也有许多。
-![sucess](imgs/sucess.png "sucess case")
+![sucess](imgs/success.png "success case")
 ![failure](imgs/failure.png "failure case")
 
 ### 安装与运行
